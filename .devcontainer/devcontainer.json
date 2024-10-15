@@ -1,5 +1,5 @@
 {
-  "image": "crystallang/crystal",
+  "image": "crystallang/crystal:latest-alpine",
   "features": {
   }
 }
