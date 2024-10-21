@@ -169,34 +169,102 @@ end
 
 # Subprogram to draw the parse tree
 def draw_parse_tree(input : String)
-  puts "Parse Tree:"
-  puts "  <program>"
-  puts "    |"
-  puts "    wake <commands> sleep"
-  puts "         |"
-
-  # Remove "wake" and "sleep" and extract commands
+  # Remove "wake" and "sleep", extract and count commands
   commands = input.gsub(/wake|sleep/, "").strip.split(/;/).map { |cmd| cmd.strip }.reject { |c| c.empty? }
+  num_commands = commands.size
 
-  # Loop through each command and progressively draw the parse tree
-  commands.each_with_index do |command, index|
-    # Split the command into key and action parts
-    key_part = command.split("=").first.strip
-    action_part = command.split("=").last.strip.chomp
+  puts "                  Parse Tree"
 
-    # Parse tree branch for each command
-    if index == 0
-      puts "         <command>"
-    else
-      puts "         <command> ->"
-    end
+  # Switch statement based on number of commands
+  case num_commands
+  when 1
+    key_part = commands[0].split("=").first.strip
+    action_part = commands[0].split("=").last.strip.chomp
 
-    puts "           |"
-    puts "           key <key> = <action>"
+    puts "\n                   <program>"
+    puts "                       |"
+    puts "             wake <commands> sleep"
+    puts "                       |"
+    puts "                   <command>"
+    puts "                       |"
+    puts "              key <key>=<action>"
+    puts "                   /         \\"
+    puts "                  #{key_part.split(" ").last}         #{action_part}"
 
-    # Print the actual key and action
-    puts "           |"
-    puts "           key #{key_part.split(" ").last} = #{action_part}"
+  when 2
+    key_part = commands[0].split("=").first.strip
+    action_part = commands[0].split("=").last.strip.chomp
+
+    key_part2 = commands[1].split("=").first.strip
+    action_part2 = commands[1].split("=").last.strip.chomp
+
+    puts "\n                   <program>"
+    puts "                       |"
+    puts "             wake <commands> sleep"
+    puts "                       |"
+    puts "              <command> <commands>"
+    puts "                 /            \\"
+    puts "      key <key>=<action>    <command>"
+    puts "           /         \\           \\"
+    puts "          #{key_part.split(" ").last}         #{action_part}   key <key>=<action>"
+    puts "                                 /         \\"
+    puts "                                #{key_part2.split(" ").last}          #{action_part2}"
+  
+    when 3
+    key_part = commands[0].split("=").first.strip
+    action_part = commands[0].split("=").last.strip.chomp
+
+    key_part2 = commands[1].split("=").first.strip
+    action_part2 = commands[1].split("=").last.strip.chomp
+
+    key_part3 = commands[2].split("=").first.strip
+    action_part3 = commands[2].split("=").last.strip.chomp
+
+    puts "\n                   <program>"
+    puts "                       |"
+    puts "              wake <commands> sleep"
+    puts "                       |"
+    puts "            <command>    <commands>"
+    puts "               /               \\"
+    puts "    key <key>=<action>      <command>   <commands>"
+    puts "         /         \\             \\             \\"
+    puts "        #{key_part.split(" ").last}        #{action_part}   key <key>=<action>  <command>"
+    puts "                               /       \\          \\"
+    puts "                              #{key_part2.split(" ").last}       #{action_part2}   key <key>=<action>"
+    puts "                                                   /       \\"
+    puts "                                                  #{key_part3.split(" ").last}        #{action_part3}"
+
+    when 4
+    key_part = commands[0].split("=").first.strip
+    action_part = commands[0].split("=").last.strip.chomp
+
+    key_part2 = commands[1].split("=").first.strip
+    action_part2 = commands[1].split("=").last.strip.chomp
+
+    key_part3 = commands[2].split("=").first.strip
+    action_part3 = commands[2].split("=").last.strip.chomp
+
+    key_part4 = commands[3].split("=").first.strip
+    action_part4 = commands[3].split("=").last.strip.chomp
+
+    puts "\n                   <program>"
+    puts "                       |"
+    puts "              wake <commands> sleep"
+    puts "                       |"
+    puts "            <command>    <commands>"
+    puts "               /               \\"
+    puts "    key <key>=<action>      <command>    <commands>"
+    puts "         /         \\             \\             \\"
+    puts "        #{key_part.split(" ").last}        #{action_part}   key <key>=<action>  <command>     <commands>"
+    puts "                               /       \\          \\               \\"
+    puts "                              #{key_part2.split(" ").last}       #{action_part2}   key <key>=<action>  <command>"
+    puts "                                                   /       \\          \\"
+    puts "                                                  #{key_part3.split(" ").last}        #{action_part3}   key <key>=<action>"
+    puts "                                                                        /       \\"
+    puts "                                                                       #{key_part4.split(" ").last}        #{action_part4}"
+
+  else
+    puts "Error: Unsupported number of commands. Max allowed is 4."
   end
 end
 
