@@ -1,3 +1,4 @@
+require "./Snippets"
 module Generator
   # Helper function to validate each individual command
   def self.validate_command(command : String) : Bool
@@ -25,30 +26,42 @@ module Generator
 
   # Subprogram to generate PBASIC code
   def self.generate_pbasic_code(input : String)
-    header = " '{$STAMP BS2p}\n '{$PBASIC 2.5}\n KEY VAR Byte\n Main:\n DO\n"
-    footer1 = "Timeout:\n GOSUB Motor_OFF\n GOTO Main\n"
-    footer2 = "Motor_OFF: LOW 13 : LOW 12 : LOW 14 : RETURN\n"
+    header = "'--- HEADER ---\n '{$STAMP BS2p}\n '{$PBASIC 2.5}\n KEY VAR Byte\n Main:\n DO\nSERIN 3,2063,250,Timeout,[KEY]\n"
+    footer1 = "'--- FOOTER 1 ---\n LOOP\nTimeout:\n GOSUB Motor_OFF\n GOTO Main\n"
+    footer2 = "'--- FOOTER 2 ---\n Motor_OFF: LOW 13 : LOW 12 : LOW 14 : RETURN\n"
 
-    body = ""
+    body = "'--- BODY ---\n"
+    subroutine = "'--- SUBROUTINES ---\n"
 
     input.scan(/key\s+([abcd])\s*=\s*(\w+)/) do |match|
       key = match[1]      # First capture group (key)
       movement = match[2] # Second capture group (movement)
       routine = MOVEMENTS[movement]
       body += "IF KEY = \"#{key}\" THEN GOSUB #{routine}\n"
+      snippet = Snippets::Movement.get(routine)
+      if snippet
+        subroutine += snippet.to_s + "\n"
+      end
     end
 
     # Combine all parts into the final PBASIC program
-    pbasic_program = header + body + footer1 + footer2
+    pbasic_program = header + body + footer1 + subroutine + footer2
 
     # Display the generated code
     puts "Generated PBASIC Code:\n#{pbasic_program}"
 
     # Save the generated code to a file
-    File.open("IZEBOT.BSP", "w") do |file|
+    File.open("IZEBOT.BS2", "w") do |file|
       file.puts(pbasic_program)
     end
 
-    puts "PBASIC program saved to IZEBOT.BSP"
+    puts "Generating object code..."
+    Process.exec \
+      command: "make", args: ["compile", "file=IZEBOT"],
+      shell: true,
+      chdir: Dir.current
+
+    puts "PBASIC program saved to IZEBOT.BS2"
+    puts "Object code saved to 'out'"
   end
 end
