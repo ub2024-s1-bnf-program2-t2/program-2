@@ -51,7 +51,7 @@ module Generator
     puts "Generated PBASIC Code:\n#{pbasic_program}"
 
     # Save the generated code to a file
-    File.open("IZEBOT.BS2", "w") do |file|
+    File.open("IZEBOT.BSP", "w") do |file|
       file.puts(pbasic_program)
     end
 
@@ -61,7 +61,7 @@ module Generator
       shell: true,
       chdir: Dir.current
 
-    puts "PBASIC program saved to IZEBOT.BS2"
+    puts "PBASIC program saved to IZEBOT.BSP"
     puts "Object code saved to 'out'"
   end
 end
