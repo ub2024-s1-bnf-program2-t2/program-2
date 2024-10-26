@@ -51,7 +51,8 @@ module Generator
     pbasic_program = header + body + footer1 + subroutine + footer2
 
     # Display the generated code
-    puts "Generated PBASIC Code:\n\n#{pbasic_program}"
+    puts "Generated PBASIC Code:\n\n"    
+    puts "\e[47m\e[0;33m#{pbasic_program}\e[0m"
 
     # Save the generated code to a file
     File.open("IZEBOT.BSP", "w") do |file|
