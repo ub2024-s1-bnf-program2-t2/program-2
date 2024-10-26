@@ -1,6 +1,16 @@
 # Intermediate code
 IZEBOT.BS2
 IZEBOT.BSP
+
+# Assembler
 stampbc_2.1
+
+# Tokenizer source code
 PBASIC-Tokenizer
 stampbc_2.1.tgz
+
+# Object code
+*.o
+
+# Executables
+main
