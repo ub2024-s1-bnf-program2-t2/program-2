@@ -14,4 +14,5 @@ help:
 
 # Compile target
 compile:
+	@echo "\n\nSTEP 2 Compiling $(file).BSP..."
 	$(CC) -v -o ./out/$(file).bin -c $(file).BSP

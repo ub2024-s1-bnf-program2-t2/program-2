@@ -7,6 +7,8 @@ module Snippets
         SPINLEFT = "SpinLeft: HIGH 13 : LOW 12 : HIGH 14 : LOW 15 : RETURN"
         SPINRIGHT = "SpinRight: HIGH 12 : LOW 13 : HIGH 15 : LOW 14 : RETURN"
 
+        MOTOROFF = "Motor_OFF: LOW 13 : LOW 12 : LOW 15 : LOW 14 : RETURN"
+
         @@forward_queried = false
         @@backward_queried = false
         @@turnleft_queried = false
@@ -24,6 +26,8 @@ module Snippets
         end
         def self.get(routine : String)
             case routine
+            when "MOTOROFF"
+                return MOTOROFF
             when "Forward"
                 if !@@forward_queried
                     @@forward_queried = true

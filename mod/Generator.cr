@@ -26,10 +26,12 @@ module Generator
 
   # Subprogram to generate PBASIC code
   def self.generate_pbasic_code(input : String)
-    header = "'--- HEADER ---\n '{$STAMP BS2p}\n '{$PBASIC 2.5}\n KEY VAR Byte\n Main:\n DO\nSERIN 3,2063,250,Timeout,[KEY]\n"
-    footer1 = "'--- FOOTER 1 ---\n LOOP\nTimeout:\n GOSUB Motor_OFF\n GOTO Main\n"
-    footer2 = "'--- FOOTER 2 ---\n Motor_OFF: LOW 13 : LOW 12 : LOW 14 : RETURN\n"
+    # Note: The spaces in the snippets are !!!IMPORTANT!!! for the indentation in the generated code
+    header = "'--- HEADER ---\n'{$STAMP BS2p}\n'{$PBASIC 2.5}\nKEY VAR Byte\nMain:\n   DO\n      SERIN 3,2063,250,Timeout,[KEY]\n"
+    footer1 = "'--- FOOTER 1 ---\n   LOOP\nTimeout:\n   GOSUB Motor_OFF\n   GOTO Main\n"
+    footer2 = "'--- FOOTER 2 ---\n#{Snippets::Movement.get("MOTOROFF").to_s}\n"
 
+    # Please !!!DO NOT!!! change the indentation in the snippets
     body = "'--- BODY ---\n"
     subroutine = "'--- SUBROUTINES ---\n"
 
@@ -37,7 +39,8 @@ module Generator
       key = match[1]      # First capture group (key)
       movement = match[2] # Second capture group (movement)
       routine = MOVEMENTS[movement]
-      body += "IF KEY = \"#{key}\" THEN GOSUB #{routine}\n"
+      # !!!IMPORTANT!!! The indentation in the snippets is important for the generated code
+      body += "      IF KEY = \"#{key}\" THEN GOSUB #{routine}\n"
       snippet = Snippets::Movement.get(routine)
       if snippet
         subroutine += snippet.to_s + "\n"
@@ -48,20 +51,20 @@ module Generator
     pbasic_program = header + body + footer1 + subroutine + footer2
 
     # Display the generated code
-    puts "Generated PBASIC Code:\n#{pbasic_program}"
+    puts "Generated PBASIC Code:\n\n#{pbasic_program}"
 
     # Save the generated code to a file
     File.open("IZEBOT.BSP", "w") do |file|
       file.puts(pbasic_program)
     end
 
-    puts "Generating object code..."
-    Process.exec \
+    puts "\nGenerating object code..."
+    Process.run \
       command: "make", args: ["compile", "file=IZEBOT"],
       shell: true,
       chdir: Dir.current
 
     puts "PBASIC program saved to IZEBOT.BSP"
-    puts "Object code saved to 'out'"
+    puts "Object code saved to 'out/IZEBOT.bin'"
   end
 end
