@@ -7,6 +7,7 @@ module Graphics
       # Display the derivation steps
       puts "\n************************************************************"
       puts "                  Leftmost Derivation:"
+      puts "\e[1;32m"
 
       # Step 1: Initial form
       sentential_form = "wake <commands> sleep"
@@ -55,12 +56,12 @@ module Graphics
           return false
         end
       end
-
+      puts "\e[0;0m"
       return true
     else
       # Handle invalid format (if "wake" or "sleep" is missing or misplaced)
       puts "\n************************************************************"
-      puts "Error: Input must start with 'wake' and end with 'sleep'"
+      puts "\e[0;31mError: Input must start with 'wake' and end with 'sleep'\e[0;0m"
       return false
     end
   end
@@ -72,6 +73,7 @@ module Graphics
     num_commands = commands.size
 
     puts "                  Parse Tree"
+    puts "\e[1;32m"
 
     # Switch statement based on number of commands
     case num_commands
@@ -158,7 +160,8 @@ module Graphics
       puts "                                                                        /       \\"
       puts "                                                                       #{key_part4.split(" ").last}        #{action_part4}"
     else
-      puts "Error: Unsupported number of commands. Max allowed is 4."
+      puts "\e[0;31mError: Unsupported number of commands. Max allowed is 4.\e[0;0m"
     end
+    puts "\e[0;0m"
   end
 end

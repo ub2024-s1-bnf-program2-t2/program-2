@@ -1,6 +1,8 @@
 require "io/console"
 require "./mod/Graphics"
 require "./mod/Generator"
+# puts "\e[33m"  # Set terminal color to yellow
+puts "\n"  # Add some space before the program starts
 
 # Method to display the BNF grammar
 def display_grammar
@@ -41,6 +43,7 @@ def main
     if input == "END"
       puts "\n************************************************************"
       puts "Program terminated." 
+      puts "\e[0m"  # Reset terminal color
       break
     end
 

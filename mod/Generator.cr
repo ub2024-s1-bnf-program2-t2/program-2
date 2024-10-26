@@ -10,14 +10,14 @@ module Generator
       # Specific error messages based on what went wrong
       if command !~ /^key\s+[abcd]\s*=\s*(DRIVE|BACK|LEFT|RIGHT|SPINL|SPINR)\s*/
         puts "\n************************************************************"
-        puts "Error: Invalid command: '#{command}'"
-        puts "       Expected format: 'key <a,b,c,d> = DRIVE|BACK|LEFT|RIGHT|SPINL|SPINR>;'"
+        puts "\e[0;31mError: Invalid command: '#{command}'"
+        puts "       Expected format: 'key <a,b,c,d> = DRIVE|BACK|LEFT|RIGHT|SPINL|SPINR>;'\e[0;0m"
       end
 
       # Additional checks for missing action
       if command =~ /^key\s+([abcd])\s*=\s*$/
         puts "\n************************************************************"
-        puts "Error: Missing action after '=' in command '#{command}'."
+        puts "\e[0;31mError: Missing action after '=' in command '#{command}'.\e[0;0m"
       end
 
       false
@@ -52,7 +52,8 @@ module Generator
 
     # Display the generated code
     puts "Generated PBASIC Code:\n\n"    
-    puts "\e[47m\e[0;33m#{pbasic_program}\e[0m"
+    # puts "\e[47m\e[0;33m#{pbasic_program}\e[0m"
+    puts "\e[1;32m\n\n#{pbasic_program}\n\n\e[0;0m"
 
     # Save the generated code to a file
     File.open("IZEBOT.BSP", "w") do |file|
