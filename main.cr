@@ -1,3 +1,4 @@
+require "io/console"
 require "./mod/Graphics"
 require "./mod/Generator"
 
@@ -6,11 +7,11 @@ def display_grammar
   grammar = <<-MULTILINE_STATEMENT
   Meta-Language BNF Grammar:
 
-  <program>  ::= "wake" <commands> "sleep"
-  <commands> ::= <command> <commands> | <command>
-  <command>  ::= "key" <key> "=" <action> ";"
-  <key>      ::= "a" | "b" | "c" | "d"
-  <action>   ::= "DRIVE" | "BACK" | "LEFT" | "RIGHT" | "SPINL" | "SPINR"
+  <program>  => wake <commands> sleep
+  <commands> => <command>; | <command>; <commands>
+  <command>  => key <button>=<action>
+  <button>   => a | b | c | d
+  <action>   => DRIVE | BACK | LEFT | RIGHT | SPINL | SPINR
   MULTILINE_STATEMENT
   puts grammar
 end
@@ -48,7 +49,9 @@ def main
       # If successful, prompt user to continue to draw the parse tree
       puts "\n************************************************************"
       puts "Press any key to draw the parse tree..."
-      gets # Wait for user to press a key
+      system("stty raw -echo") # Set terminal to raw mode
+      STDIN.raw &.read_char  # Do not assign to variable--discard any input  :: Credit: https://stackoverflow.com/a/39967524/10976415
+      system("stty -raw echo") # Reset terminal to normal mode
 
       # Generate and display the parse tree
       Graphics.draw_parse_tree(input)
@@ -56,7 +59,7 @@ def main
       # Prompt user to continue to output the PBASIC code
       puts "\n************************************************************"
       puts "Press any key to output the PBASIC code..."
-      gets # Wait for user to press a key again
+      STDIN.raw &.read_char  # Do not assign to variable--discard any input  :: Credit: https://stackoverflow.com/a/39967524/10976415
 
       # Generate PBASIC code based on the valid input string
       Generator.generate_pbasic_code(input)
@@ -64,7 +67,7 @@ def main
 
     # Pause before the next iteration
     puts "\nPress any key to continue..."
-    gets
+    STDIN.raw &.read_char  # Do not assign to variable--discard any input  :: Credit: https://stackoverflow.com/a/39967524/10976415
   end
 end
 

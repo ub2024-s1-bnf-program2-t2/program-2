@@ -2,7 +2,7 @@ require "./Snippets"
 module Generator
   # Helper function to validate each individual command
   def self.validate_command(command : String) : Bool
-    # Check if the command matches the pattern "key <key> = <action>;"
+    # Check if the command matches the pattern "key <button> = <action>;"
     # This allows optional spaces around the equal sign
     if command.match(/^key\s+([abcd])\s*=\s*(DRIVE|BACK|LEFT|RIGHT|SPINL|SPINR)\s*/)
       true

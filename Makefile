@@ -14,4 +14,4 @@ help:
 
 # Compile target
 compile:
-	$(CC) -v -o ./out/$(file).bin -c $(file).BS2
+	$(CC) -v -o ./out/$(file).bin -c $(file).BSP

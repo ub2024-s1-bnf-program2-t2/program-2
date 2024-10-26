@@ -41,11 +41,11 @@ module Graphics
           action_part = command.split("=").last.strip.chomp
 
           # Replace the placeholders in sequence for each command
-          sentential_form = sentential_form.sub("<command>", "key <key> = <action>;")
+          sentential_form = sentential_form.sub("<command>", "key <button>=<action>")
           puts "%02d         ->  #{sentential_form}" % (loop += 1)
 
-          # Replace the <key> placeholder with the actual value
-          sentential_form = sentential_form.sub("<key>", key_part.split(" ").last)
+          # Replace the <button> placeholder with the actual value
+          sentential_form = sentential_form.sub("<button>", key_part.split(" ").last)
           puts "%02d         ->  #{sentential_form}" % (loop += 1)
 
           # Replace the <action> placeholder with the actual value
@@ -85,7 +85,7 @@ module Graphics
       puts "                       |"
       puts "                   <command>"
       puts "                       |"
-      puts "              key <key>=<action>"
+      puts "              key <button>=<action>"
       puts "                   /         \\"
       puts "                  #{key_part.split(" ").last}         #{action_part}"
     when 2
@@ -101,9 +101,9 @@ module Graphics
       puts "                       |"
       puts "              <command> <commands>"
       puts "                 /            \\"
-      puts "      key <key>=<action>    <command>"
+      puts "      key <button>=<action>    <command>"
       puts "           /         \\           \\"
-      puts "          #{key_part.split(" ").last}         #{action_part}   key <key>=<action>"
+      puts "          #{key_part.split(" ").last}         #{action_part}   key <button>=<action>"
       puts "                                 /         \\"
       puts "                                #{key_part2.split(" ").last}          #{action_part2}"
     when 3
@@ -122,11 +122,11 @@ module Graphics
       puts "                       |"
       puts "            <command>    <commands>"
       puts "               /               \\"
-      puts "    key <key>=<action>      <command>   <commands>"
+      puts "    key <button>=<action>      <command>   <commands>"
       puts "         /         \\             \\             \\"
-      puts "        #{key_part.split(" ").last}        #{action_part}   key <key>=<action>  <command>"
+      puts "        #{key_part.split(" ").last}        #{action_part}   key <button>=<action>  <command>"
       puts "                               /       \\          \\"
-      puts "                              #{key_part2.split(" ").last}       #{action_part2}   key <key>=<action>"
+      puts "                              #{key_part2.split(" ").last}       #{action_part2}   key <button>=<action>"
       puts "                                                   /       \\"
       puts "                                                  #{key_part3.split(" ").last}        #{action_part3}"
     when 4
@@ -148,13 +148,13 @@ module Graphics
       puts "                       |"
       puts "            <command>    <commands>"
       puts "               /               \\"
-      puts "    key <key>=<action>      <command>    <commands>"
+      puts "    key <button>on>=<action>      <command>    <commands>"
       puts "         /         \\             \\             \\"
-      puts "        #{key_part.split(" ").last}        #{action_part}   key <key>=<action>  <command>     <commands>"
+      puts "        #{key_part.split(" ").last}        #{action_part}   key <button>=<action>  <command>     <commands>"
       puts "                               /       \\          \\               \\"
-      puts "                              #{key_part2.split(" ").last}       #{action_part2}   key <key>=<action>  <command>"
+      puts "                              #{key_part2.split(" ").last}       #{action_part2}   key <button>=<action>  <command>"
       puts "                                                   /       \\          \\"
-      puts "                                                  #{key_part3.split(" ").last}        #{action_part3}   key <key>=<action>"
+      puts "                                                  #{key_part3.split(" ").last}        #{action_part3}   key <button>=<action>"
       puts "                                                                        /       \\"
       puts "                                                                       #{key_part4.split(" ").last}        #{action_part4}"
     else
