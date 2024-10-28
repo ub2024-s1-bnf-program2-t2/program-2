@@ -18,9 +18,9 @@ compile:
 	$(CC) -v -o ./out/$(file).bin -c $(file).BSP
 run:
 	@crystal run main.cr
-life:
+start:
 	@./main
-money:
+target:
 	@echo "Building for: Linux x86_64"
 	crystal build main.cr --cross-compile
 	cc main.o -o main  -rdynamic -L/usr/bin/../lib/crystal -lpcre2-8  -lm -lgc -lpthread -ldl  -lpthread -levent  -lrt -lpthread -ldl
@@ -30,3 +30,9 @@ clean:
 	rm -rf main
 	rm -rf IZEBOT.BSP
 	rm -rf out/IZEBOT.bin
+
+# Dummy targets for demo purposes
+time: 
+	@make target
+life: 
+	@make start

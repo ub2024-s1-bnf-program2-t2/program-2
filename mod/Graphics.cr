@@ -10,7 +10,7 @@ module Graphics
       puts "\e[1;32m"
 
       # Step 1: Initial form
-      sentential_form = "wake <commands> sleep"
+      sentential_form = "\e[0;32mwake \e[1;37m<commands>\e[1;0m  \e[0;32msleep\e[1;0m "
       puts "\n<program>  ->  #{sentential_form}"
       loop = 1
 
@@ -21,15 +21,15 @@ module Graphics
       commands.each_with_index do |_, index|
         if index == 0
           # First step: Replace the first <commands> with <command><commands>
-          sentential_form = sentential_form.gsub("<commands>", "<command> <commands>")
+          sentential_form = sentential_form.gsub("<commands>", "\e[1;37m<command>\e[0;35m; \e[1;37m<commands>\e[1;0m")
         else
           # For subsequent steps, replace the remaining <commands> with <command><commands> progressively
-          sentential_form = sentential_form.gsub("<commands>", "<command> <commands>")
+          sentential_form = sentential_form.gsub("<commands>", "\e[1;37m<command>\e[0;35m; \e[1;37m<commands>\e[1;0m")
         end
 
         # Once we reach the last command, replace <commands> with just <command>
         if index == commands.size - 1
-          sentential_form = sentential_form.gsub(" <commands>", "")
+          sentential_form = sentential_form.gsub("<commands>", "")
         end
 
         puts "%02d         ->  #{sentential_form}" % (loop += 1)
@@ -42,15 +42,15 @@ module Graphics
           action_part = command.split("=").last.strip.chomp
 
           # Replace the placeholders in sequence for each command
-          sentential_form = sentential_form.sub("<command>", "key <button>=<action>")
+          sentential_form = sentential_form.sub("<command>", "\e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m")
           puts "%02d         ->  #{sentential_form}" % (loop += 1)
 
           # Replace the <button> placeholder with the actual value
-          sentential_form = sentential_form.sub("<button>", key_part.split(" ").last)
+          sentential_form = sentential_form.sub("<button>", "\e[0;31m" + key_part.split(" ").last + "\e[1;0m")
           puts "%02d         ->  #{sentential_form}" % (loop += 1)
 
           # Replace the <action> placeholder with the actual value
-          sentential_form = sentential_form.sub("<action>", action_part)
+          sentential_form = sentential_form.sub("<action>", "\e[0;34m" + action_part + "\e[1;0m")
           puts "%02d         ->  #{sentential_form}" % (loop += 1)
         else
           return false
@@ -81,15 +81,15 @@ module Graphics
       key_part = commands[0].split("=").first.strip
       action_part = commands[0].split("=").last.strip.chomp
 
-      puts "\n                   <program>"
+      puts "\n                   \e[1;37m<program>\e[1;0m"
       puts "                       |"
-      puts "             wake <commands> sleep"
+      puts "             \e[0;32mwake \e[1;37m<commands>\e[1;0m \e[0;32msleep\e[1;0m"
       puts "                       |"
-      puts "                   <command>"
+      puts "                   \e[1;37m<command>\e[1;0m"
       puts "                       |"
-      puts "              key <button>=<action>"
+      puts "              \e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m"
       puts "                   /         \\"
-      puts "                  #{key_part.split(" ").last}         #{action_part}"
+      puts "                  #{"\e[0;31m" + key_part.split(" ").last}         #{"\e[0;34m" + action_part + "\e[1;0m"}"
     when 2
       key_part = commands[0].split("=").first.strip
       action_part = commands[0].split("=").last.strip.chomp
@@ -97,17 +97,17 @@ module Graphics
       key_part2 = commands[1].split("=").first.strip
       action_part2 = commands[1].split("=").last.strip.chomp
 
-      puts "\n                   <program>"
+      puts "\n                   \e[1;37m<program>\e[1;0m"
       puts "                       |"
-      puts "             wake <commands> sleep"
+      puts "             \e[0;32mwake \e[1;37m<commands>\e[1;0m \e[0;32msleep\e[1;0m"
       puts "                       |"
-      puts "              <command> <commands>"
+      puts "              \e[1;37m<command> \e[1;37m<commands>\e[1;0m"
       puts "                 /            \\"
-      puts "      key <button>=<action>    <command>"
+      puts "      \e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m    \e[1;37m<command>\e[1;0m"
       puts "           /         \\           \\"
-      puts "          #{key_part.split(" ").last}         #{action_part}   key <button>=<action>"
+      puts "          #{"\e[0;31m" + key_part.split(" ").last}         #{"\e[0;34m" + action_part + "\e[1;0m"}   \e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m"
       puts "                                 /         \\"
-      puts "                                #{key_part2.split(" ").last}          #{action_part2}"
+      puts "                                #{"\e[0;31m" + key_part2.split(" ").last}          #{"\e[0;34m" + action_part2 + "\e[1;0m"}"
     when 3
       key_part = commands[0].split("=").first.strip
       action_part = commands[0].split("=").last.strip.chomp
@@ -118,17 +118,17 @@ module Graphics
       key_part3 = commands[2].split("=").first.strip
       action_part3 = commands[2].split("=").last.strip.chomp
 
-      puts "\n                   <program>"
+      puts "\n                   \e[1;37m<program>\e[1;0m"
       puts "                       |"
-      puts "              wake <commands> sleep"
+      puts "              \e[0;32mwake \e[1;37m<commands>\e[1;0m \e[0;32msleep\e[1;0m"
       puts "                       |"
-      puts "            <command>    <commands>"
+      puts "            \e[1;37m<command>    \e[1;37m<commands>\e[1;0m"
       puts "               /               \\"
-      puts "    key <button>=<action>      <command>   <commands>"
+      puts "    \e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m      \e[1;37m<command>   \e[1;37m<commands>\e[1;0m"
       puts "         /         \\             \\             \\"
-      puts "        #{key_part.split(" ").last}        #{action_part}   key <button>=<action>  <command>"
+      puts "        #{key_part.split(" ").last}        #{action_part}   \e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m  \e[1;37m<command>"
       puts "                               /       \\          \\"
-      puts "                              #{key_part2.split(" ").last}       #{action_part2}   key <button>=<action>"
+      puts "                              #{key_part2.split(" ").last}       #{action_part2}   \e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m"
       puts "                                                   /       \\"
       puts "                                                  #{key_part3.split(" ").last}        #{action_part3}"
     when 4
@@ -144,19 +144,19 @@ module Graphics
       key_part4 = commands[3].split("=").first.strip
       action_part4 = commands[3].split("=").last.strip.chomp
 
-      puts "\n                   <program>"
+      puts "\n                   \e[1;37m<program>\e[1;0m"
       puts "                       |"
-      puts "              wake <commands> sleep"
+      puts "              \e[0;32mwake \e[1;37m<commands>\e[1;0m \e[0;32msleep\e[1;0m"
       puts "                       |"
-      puts "            <command>    <commands>"
+      puts "            \e[1;37m<command>    \e[1;37m<commands>\e[1;0m"
       puts "               /               \\"
-      puts "    key <button>on>=<action>      <command>    <commands>"
+      puts "    \e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m      \e[1;37m<command>    \e[1;37m<commands>\e[1;0m"
       puts "         /         \\             \\             \\"
-      puts "        #{key_part.split(" ").last}        #{action_part}   key <button>=<action>  <command>     <commands>"
+      puts "        #{key_part.split(" ").last}        #{action_part}   \e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m  \e[1;37m<command>     \e[1;37m<commands>\e[1;0m"
       puts "                               /       \\          \\               \\"
-      puts "                              #{key_part2.split(" ").last}       #{action_part2}   key <button>=<action>  <command>"
+      puts "                              #{key_part2.split(" ").last}       #{action_part2}   \e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m  \e[1;37m<command>"
       puts "                                                   /       \\          \\"
-      puts "                                                  #{key_part3.split(" ").last}        #{action_part3}   key <button>=<action>"
+      puts "                                                  #{key_part3.split(" ").last}        #{action_part3}   \e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m"
       puts "                                                                        /       \\"
       puts "                                                                       #{key_part4.split(" ").last}        #{action_part4}"
     else

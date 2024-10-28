@@ -9,11 +9,11 @@ def display_grammar
   grammar = <<-MULTILINE_STATEMENT
   Meta-Language BNF Grammar:
 
-  <program>  => wake <commands> sleep
-  <commands> => <command>; | <command>; <commands>
-  <command>  => key <button>=<action>
-  <button>   => a | b | c | d
-  <action>   => DRIVE | BACK | LEFT | RIGHT | SPINL | SPINR
+  \e[1;37m<program>\e[1;0m  => \e[0;32mwake \e[1;37m<commands>\e[1;0m \e[0;32msleep
+  \e[1;37m<commands>\e[1;0m => \e[1;37m<command>\e[1;0m\e[0;35m; \e[1;0m| \e[1;37m<command>\e[1;0m\e[0;35m; \e[1;37m<commands>\e[1;0m
+  \e[1;37m<command>\e[1;0m  => \e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m
+  \e[1;37m<button>\e[1;0m   => \e[0;31ma \e[1;0m|\e[0;31m b \e[1;0m|\e[0;31m c \e[1;0m|\e[0;31m d
+  \e[1;37m<action>\e[1;0m   => \e[0;34mDRIVE \e[1;0m|\e[0;34m BACK \e[1;0m|\e[0;34m LEFT \e[1;0m|\e[0;34m RIGHT \e[1;0m|\e[0;34m SPINL \e[1;0m|\e[0;34m	SPINR\e[1;0m
   MULTILINE_STATEMENT
   puts grammar
 end
