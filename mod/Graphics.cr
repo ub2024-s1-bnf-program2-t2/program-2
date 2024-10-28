@@ -126,11 +126,11 @@ module Graphics
       puts "               /               \\"
       puts "    \e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m      \e[1;37m<command>   \e[1;37m<commands>\e[1;0m"
       puts "         /         \\             \\             \\"
-      puts "        #{key_part.split(" ").last}        #{action_part}   \e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m  \e[1;37m<command>"
+      puts "        #{"\e[0;31m" + key_part.split(" ").last}        #{"\e[0;34m" + action_part}   \e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m  \e[1;37m<command>"
       puts "                               /       \\          \\"
-      puts "                              #{key_part2.split(" ").last}       #{action_part2}   \e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m"
+      puts "                              #{"\e[0;31m" + key_part2.split(" ").last}       #{"\e[0;34m" + action_part2}   \e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m"
       puts "                                                   /       \\"
-      puts "                                                  #{key_part3.split(" ").last}        #{action_part3}"
+      puts "                                                  #{"\e[0;31m" + key_part3.split(" ").last}        #{"\e[0;34m" + action_part3 + "\e[1;0m"}"
     when 4
       key_part = commands[0].split("=").first.strip
       action_part = commands[0].split("=").last.strip.chomp
@@ -152,13 +152,13 @@ module Graphics
       puts "               /               \\"
       puts "    \e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m      \e[1;37m<command>    \e[1;37m<commands>\e[1;0m"
       puts "         /         \\             \\             \\"
-      puts "        #{key_part.split(" ").last}        #{action_part}   \e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m  \e[1;37m<command>     \e[1;37m<commands>\e[1;0m"
+      puts "        #{"\e[0;31m" + key_part.split(" ").last}        #{"\e[0;34m" + action_part}   \e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m  \e[1;37m<command>     \e[1;37m<commands>\e[1;0m"
       puts "                               /       \\          \\               \\"
-      puts "                              #{key_part2.split(" ").last}       #{action_part2}   \e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m  \e[1;37m<command>"
+      puts "                              #{"\e[0;31m" + key_part2.split(" ").last}       #{"\e[0;34m" + action_part2}   \e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m  \e[1;37m<command>"
       puts "                                                   /       \\          \\"
-      puts "                                                  #{key_part3.split(" ").last}        #{action_part3}   \e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m"
+      puts "                                                  #{"\e[0;31m" + key_part3.split(" ").last}        #{"\e[0;34m" + action_part3}   \e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m"
       puts "                                                                        /       \\"
-      puts "                                                                       #{key_part4.split(" ").last}        #{action_part4}"
+      puts "                                                                       #{"\e[0;31m" + key_part4.split(" ").last}        #{"\e[0;34m" + action_part4 + "\e[1;0m"}"
     else
       puts "\e[0;31mError: Unsupported number of commands. Max allowed is 4.\e[0;0m"
     end
