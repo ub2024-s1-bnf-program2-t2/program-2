@@ -26,8 +26,9 @@ def main
 
     # Prompt user for input string
     puts "\n************************************************************"
-    print "Enter an input string (or type 'END' to quit): "
+    print "Enter an input string (or type 'END' to quit): \e[38;5;39m"
     input = gets
+    puts "\e[0m"  # Reset terminal color
 
     # Check if input is nil and exit if no input is provided
     if input.nil?
