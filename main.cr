@@ -34,7 +34,7 @@ def main
     # Check if input is nil and exit if no input is provided
     if input.nil?
       puts "\n*************************************"
-      puts "No input provided."
+      puts "\e[0;31mNo input provided.\e[0;0m"
       puts "************************************************************"
       next
     end
@@ -47,6 +47,12 @@ def main
       puts "Program terminated." 
       puts "\e[0m"  # Reset terminal color
       break
+    end
+    # Exit if the input is 'END'
+    if input == "end"
+      puts "\e[0;31mError: Did you mean 'END'?\e[0;0m\n" 
+      puts "\e[0m"  # Reset terminal color
+      next
     end
 
     # Attempt to derive the input string using the grammar
