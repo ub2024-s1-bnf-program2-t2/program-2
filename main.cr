@@ -13,9 +13,10 @@ def display_grammar
   \e[1;37m<commands>\e[1;0m => \e[1;37m<command>\e[1;0m\e[0;35m; \e[1;0m| \e[1;37m<command>\e[1;0m\e[0;35m; \e[1;37m<commands>\e[1;0m
   \e[1;37m<command>\e[1;0m  => \e[0;33mkey \e[1;37m<button>\e[1;0m\e[0;35m=\e[1;37m<action>\e[1;0m
   \e[1;37m<button>\e[1;0m   => \e[0;31ma \e[1;0m|\e[0;31m b \e[1;0m|\e[0;31m c \e[1;0m|\e[0;31m d
-  \e[1;37m<action>\e[1;0m   => \e[0;34mDRIVE \e[1;0m|\e[0;34m BACK \e[1;0m|\e[0;34m LEFT \e[1;0m|\e[0;34m RIGHT \e[1;0m|\e[0;34m SPINL \e[1;0m|\e[0;34m	SPINR\e[1;0m
+  \e[1;37m<action>\e[1;0m   => \e[0;34mDRIVE \e[1;0m|\e[0;34m BACK \e[1;0m|\e[0;34m LEFT \e[1;0m|\e[0;34m RIGHT \e[1;0m|\e[0;34m SPINL \e[1;0m|\e[0;34m SPINR
   MULTILINE_STATEMENT
   puts grammar
+  puts "\e[0m"  # Reset terminal color
 end
 
 # Main method to run the program

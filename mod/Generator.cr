@@ -11,7 +11,7 @@ module Generator
       if command !~ /^key\s+[abcd]\s*=\s*(DRIVE|BACK|LEFT|RIGHT|SPINL|SPINR)\s*/
         puts "\n************************************************************"
         puts "\e[0;31mError: Invalid command: '#{command}'"
-        puts "       Expected format: 'key <a,b,c,d> = DRIVE|BACK|LEFT|RIGHT|SPINL|SPINR>;'\e[0;0m"
+        puts "       Expected format: 'key <a,b,c,d> = DRIVE|BACK|LEFT|RIGHT|SPINL|SPINR;'\e[0;0m"
       end
 
       # Additional checks for missing action
